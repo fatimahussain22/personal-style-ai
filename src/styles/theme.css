@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --canvas: #F5EBE0;
+  --card-bg: #FDFBF7;
+  --card-bg-alt: #FAF6F0;
+  --zone-bg: #F5EFE6;
+  --ink: #2A2520;
+  --ink-muted: #5A4F47;
+  --ink-light: #B89E8F;
+  --accent-primary: #C4766B;
+  --accent-secondary: #D4A574;
+  --accent-tertiary: #E8B8C8;
+  --celadon: #5C7B6B;
+  --celadon-deep: #4A6559;
+  --border: #E5D9CE;
+  --border-soft: #DDD0C6;
+  --font-display: 'Noto Serif KR', Georgia, serif;
+  --font-body: 'Inter', 'Noto Sans KR', sans-serif;
+}
+
+/* ── Floating card animation ── */
+@keyframes psa-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+.psa-float-1 { animation: psa-float 3.2s ease-in-out infinite 0.0s; }
+.psa-float-2 { animation: psa-float 3.2s ease-in-out infinite 0.35s; }
+.psa-float-3 { animation: psa-float 3.2s ease-in-out infinite 0.7s; }
+
+/* ── Shared buttons ── */
+.psa-btn {
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 140ms ease, transform 120ms ease, border-color 120ms ease;
+}
+.psa-btn:focus-visible { outline: 2px solid var(--accent-secondary); outline-offset: 2px; }
+.psa-btn-celadon { background: var(--celadon); color: #F8F3ED; border: none; }
+.psa-btn-celadon:hover { background: var(--celadon-deep); transform: translateY(-1px); }
+.psa-btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+.psa-btn-outline:hover { border-color: var(--ink-muted); background: var(--zone-bg); }
+
+/* ── Back button ── */
+.psa-back-btn {
+  padding: 8px 14px;
+  background: transparent;
+  color: var(--ink-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: border-color 120ms ease;
+}
+.psa-back-btn:hover { border-color: var(--ink-muted); }
