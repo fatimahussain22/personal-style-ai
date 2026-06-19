@@ -9,7 +9,7 @@ import FaceShape from "./screens/FaceShape";
 import FaceJewelry from "./screens/FaceJewelry";
 import Budget from "./screens/Budget";
 
-const MOCK_MODE = true;
+const MOCK_MODE = false;
 const API_KEY = process.env.REACT_APP_GEMINI_KEY;
 
 const MOCK_RESPONSE = {
