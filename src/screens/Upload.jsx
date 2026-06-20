@@ -169,7 +169,8 @@ function FlipCard({ card, index }) {
 }
 
 export default function Upload({ photoUrl, fileRef, handlePhotoUpload, goTo }) {
-  const [hasPhoto, setHasPhoto] = useState(false);
+ // eslint-disable-next-line no-unused-vars
+const [hasPhoto, setHasPhoto] = useState(false);
   const localRef = useRef();
 
   const handleUpload = (e) => {

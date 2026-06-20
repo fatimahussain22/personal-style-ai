@@ -25,7 +25,6 @@ export default function App() {
   const [reason, setReason] = useState(null);
   const [faceShape, setFaceShape] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [veinError, setVeinError] = useState(null);
   const [history, setHistory] = useState([]);
   const fileRef = useRef();
 

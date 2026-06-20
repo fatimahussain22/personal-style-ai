@@ -80,14 +80,14 @@ export default function Jewelry({ undertone, goTo, goBack }) {
 
         {/* Metal Badge */}
         <div style={{
-          display: "inline-flex",
+          
           alignItems: "center",
           gap: "8px",
           padding: "12px 20px",
           background: `${getMetalColor(j.metal)}20`,
           border: `1.5px solid ${getMetalColor(j.metal)}`,
           borderRadius: "12px",
-          marginBottom: "24px",
+          
           margin: "0 auto 24px",
           display: "flex",
           justifyContent: "center"

@@ -45,12 +45,16 @@ export function Wrap({ children }) {
   );
 }
 
-export function Btn({ label, onClick, color }) {
+export function Btn({ label, onClick, color, disabled }) {
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       className="psa-btn psa-btn-celadon"
-      style={color ? { background: color } : {}}
+      style={{
+        ...(color ? { background: color } : {}),
+        ...(disabled ? { opacity: 0.5, cursor: "not-allowed" } : {}),
+      }}
     >
       {label}
     </button>

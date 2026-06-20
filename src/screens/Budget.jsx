@@ -3,7 +3,7 @@ import { Wrap, BackBtn, Btn } from "../components/Shared";
 import { COLOR_PALETTES } from "../data/palettes";
 import { JEWELRY_METAL } from "../data/jewelry";
 
-const MOCK_MODE = true;
+const MOCK_MODE = false;
 
 const MOCK_STORES = [
   { name: "Nishat Linen", category: "Clothing", reason: "Great warm-toned kurtas in terracotta, coral and camel shades.", link: "https://nishatlinen.com" },
@@ -26,7 +26,16 @@ export default function Budget({ goBack, undertone, faceShape }) {
   const jewelryMetal = JEWELRY_METAL[undertone]?.metal || "Gold";
 
   const handleSearch = async () => {
-    if (!budget.trim()) return;
+    const budgetNum = Number(budget);
+    const MIN_BUDGET = 5000;
+    if (!budget.trim() || isNaN(budgetNum) || budgetNum <= 0) {
+      setError("Please enter a budget greater than 0.");
+      return;
+    }
+    if (budgetNum < MIN_BUDGET) {
+      setError(`Please enter a budget of at least ${MIN_BUDGET} PKR for realistic store matches.`);
+      return;
+    }
     setLoading(true);
     setError(null);
     setStores(null);
@@ -78,13 +87,20 @@ Reply ONLY in this exact JSON format, no extra text:
 
       setStores(results);
     } catch (err) {
-      // Any failure here — quota exhaustion, network drop, malformed
-      // Gemini output, JSON.parse failure, etc. — shows the same calm
-      // message. Real users never see a raw error string.
-      console.error("Budget store search failed:", err);
-      setError(
-        "✦ This demo's free API quota has run out for now. It resets soon — please check back in a bit and try again. Thanks for your patience!"
-      );
+      const msg = (err.message || "").toLowerCase();
+      const isQuotaError =
+        msg.includes("quota") ||
+        msg.includes("resource_exhausted") ||
+        msg.includes("rate limit") ||
+        msg.includes("429");
+
+      if (isQuotaError) {
+        setError(
+          "✦ This demo's free API quota has run out for now. It resets soon — please check back in a bit and try again. Thanks for your patience!"
+        );
+      } else {
+        setError("Something went wrong: " + err.message);
+      }
     }
 
     setLoading(false);
@@ -119,14 +135,7 @@ Reply ONLY in this exact JSON format, no extra text:
             maxWidth: "560px",
             margin: "0 auto 32px"
           }}>
-            {/* Shopping Bag Icon */}
-            <div style={{
-              fontSize: "48px",
-              marginBottom: "16px",
-              textAlign: "center"
-            }}>
-              
-            </div>
+            
 
             {/* Headline */}
             <h2 style={{
@@ -186,7 +195,7 @@ Reply ONLY in this exact JSON format, no extra text:
               </label>
               <input
                 type="number"
-                placeholder="e.g. 3000, 5000, 10000"
+                placeholder="Must be greater than 5000 PKR"
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
                 style={{
@@ -235,7 +244,7 @@ Reply ONLY in this exact JSON format, no extra text:
           <Btn
             label={loading ? "Searching stores... " : "Find stores for my budget ✦"}
             onClick={handleSearch}
-            disabled={loading || !budget.trim()}
+            disabled={loading || !budget.trim() || Number(budget) <= 0 || isNaN(Number(budget))}
           />
         </>
       ) : (

@@ -68,7 +68,7 @@ export default function AvoidColors({ photoUrl, undertone, goTo, goBack }) {
         }}>
           <img
             src={photoUrl}
-            alt="your photo"
+            alt="user portrait"
             style={{
               width: "100px",
               height: "120px",

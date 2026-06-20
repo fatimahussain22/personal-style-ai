@@ -73,7 +73,7 @@ export default function FaceJewelry({ faceShape, goTo, goBack }) {
 
         {/* Face Shape Badge */}
         <div style={{
-          display: "inline-flex",
+          
           alignItems: "center",
           justifyContent: "center",
           gap: "8px",
